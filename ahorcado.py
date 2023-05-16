@@ -94,6 +94,7 @@ class JuegoAhorcado:
 
         LetrasIncorrectas = []
         LetrasCorrectas = []
+        nombre = input("Como te llamas?")
         secreto = random.choice(self.PalabraJuego)
 
         while True:
@@ -113,7 +114,7 @@ class JuegoAhorcado:
                 if Resultado:
                     print(self.Salvado[0])
                     print('¡Bien hecho! la palabra secreta es :', secreto)
-                    print('Has ganado!')
+                    print('Has ganado! ' + nombre)
                     break
 
             else:
