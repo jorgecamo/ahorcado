@@ -5,7 +5,10 @@ def DimeLetra(LetrasActuaales):
     while True:
         print('Adivina una letra.')
         adivina = input('> ').upper()
-        if len(adivina) != 1:
+        if adivina == 'TERMINAR':
+            adivina = "1"
+            return adivina
+        elif len(adivina) != 1:
             print('Introduce una única letra.')
         elif adivina in LetrasActuaales:
             print('Esa letra ya la sabías. Elige otra vez.')
@@ -124,7 +127,10 @@ class JuegoAhorcado:
             else:
                 LetrasIncorrectas.append(Letra)
                 NumIntentos = Intentos(NumIntentos)
-
+                if Letra == "1":
+                    print(self.Estados[6])
+                    print('La palabra era "{}"'.format(secreto))
+                    break
                 if len(LetrasIncorrectas) == len(self.Estados) - 1:
                     self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos)
                     print('Demasiados intentos!')
