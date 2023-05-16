@@ -16,6 +16,11 @@ def DimeLetra(LetrasActuaales):
             return adivina
 
 
+def Intentos(intentos):
+    intentos -= 1
+    return intentos
+
+
 class JuegoAhorcado:
     Estados = [
         r"""
@@ -94,16 +99,15 @@ class JuegoAhorcado:
 
         LetrasIncorrectas = []
         LetrasCorrectas = []
+        NumIntentos = 6
         nombre = input("Como te llamas?")
         secreto = random.choice(self.PalabraJuego)
 
         while True:
-            self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto)
-
+            self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos)
             Letra = DimeLetra(LetrasIncorrectas + LetrasCorrectas)
 
             if Letra in secreto:
-
                 LetrasCorrectas.append(Letra)
 
                 Resultado = True
@@ -119,18 +123,19 @@ class JuegoAhorcado:
 
             else:
                 LetrasIncorrectas.append(Letra)
+                NumIntentos = Intentos(NumIntentos)
 
                 if len(LetrasIncorrectas) == len(self.Estados) - 1:
-                    self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto)
+                    self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos)
                     print('Demasiados intentos!')
                     print('La palabra era "{}"'.format(secreto))
                     break
 
-    def dibujar(self, LetrasIncorrectas, LetrasCorrectas, secreto):
+    def dibujar(self, LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos):
         print(self.Estados[len(LetrasIncorrectas)])
         print('La categoría es: ', self.Categoria)
         print()
-
+        print("Te quedan :" + str(NumIntentos) + " intentos.")
         print('Letras incorrectas: ', end='')
         for LetraIncorrecta in LetrasIncorrectas:
             print(LetraIncorrecta, end=' ')
