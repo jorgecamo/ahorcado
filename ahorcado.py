@@ -93,10 +93,12 @@ class JuegoAhorcado:
     / \ |
     ====="""]
 
-    Categoria = 'FRUTAS'
-    PalabraJuego = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
-                   'MANDARINA ' \
-                   'NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
+    Categoria = 'FRUTAS FUTBOLISTAS COCHES'.split()
+    Frutas = 'PERA PLATANO UVA MANZANA MELOCOTON KIWI ALBARICOQUE CEREZA CIRUELA FRESA GRANADA HIGO LIMA LIMON ' \
+             'MANDARINA ' \
+             'NARANJA MELON MORA NISPERO PIÑA POMELO SANDIA '.split()
+    Coches = 'LAMBO BMW MERCEDES TESLA'.split()
+    Futbolistas = 'MESSI CRISTIANO NEYMAR KANTE'.split()
 
     def jugar(self):
 
@@ -104,10 +106,16 @@ class JuegoAhorcado:
         LetrasCorrectas = []
         NumIntentos = 6
         nombre = input("Como te llamas?")
-        secreto = random.choice(self.PalabraJuego)
+        cat = random.choice(self.Categoria)
+        if cat == 'FRUTAS':
+            secreto = random.choice(self.Frutas)
+        elif cat == 'COCHES':
+            secreto = random.choice(self.Coches)
+        else:
+            secreto = random.choice(self.Futbolistas)
 
         while True:
-            self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos)
+            self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos, cat)
             Letra = DimeLetra(LetrasIncorrectas + LetrasCorrectas)
 
             if Letra in secreto:
@@ -132,14 +140,14 @@ class JuegoAhorcado:
                     print('La palabra era "{}"'.format(secreto))
                     break
                 if len(LetrasIncorrectas) == len(self.Estados) - 1:
-                    self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos)
+                    self.dibujar(LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos, cat)
                     print('Demasiados intentos!')
                     print('La palabra era "{}"'.format(secreto))
                     break
 
-    def dibujar(self, LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos):
+    def dibujar(self, LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos, cat):
         print(self.Estados[len(LetrasIncorrectas)])
-        print('La categoría es: ', self.Categoria)
+        print('La categoría es: ', cat)
         print()
         print("Te quedan :" + str(NumIntentos) + " intentos.")
         print('Letras incorrectas: ', end='')
