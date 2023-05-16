@@ -1,7 +1,17 @@
 import random
 
+"""
+# Este programa es una ahorcado de toda la vida con 6 intentos de poner una letra mal.
+"""
+
 
 def DimeLetra(LetrasActuaales):
+    """
+    Este metodo sirve para comprobar si la letra que has puesto sirve para gastar un intento.
+    Tambien puedes terminar el programa ponendo terminar.
+    :param LetrasActuaales: **String de las letras que estan.**
+    :return: Char Letra de intento
+    """
     while True:
         print('Adivina una letra.')
         adivina = input('> ').upper()
@@ -20,11 +30,20 @@ def DimeLetra(LetrasActuaales):
 
 
 def Intentos(intentos):
+    """
+    Este metodo sirve para descontar intentos
+    :param intentos: Int intentos actuales
+    :return: Int Intentos restantes
+    """
     intentos -= 1
     return intentos
 
 
 class JuegoAhorcado:
+    """
+    *En esta clase se crea la estructura del ahoracado y tambien estan definidas las categorias y las palabras
+    disponibles para jugar.*
+    """
     Estados = [
         r"""
      +--+
@@ -101,7 +120,11 @@ class JuegoAhorcado:
     Futbolistas = 'MESSI CRISTIANO NEYMAR KANTE'.split()
 
     def jugar(self):
-
+        """
+        En este metodo es cuando empieza el juego, y se ejecuta un bucle hasta que se el resultado correcto,
+        o se gasten todos los intentos.
+        :return: Resultado
+        """
         LetrasIncorrectas = []
         LetrasCorrectas = []
         NumIntentos = 6
@@ -146,6 +169,16 @@ class JuegoAhorcado:
                     break
 
     def dibujar(self, LetrasIncorrectas, LetrasCorrectas, secreto, NumIntentos, cat):
+        """
+
+        :param LetrasIncorrectas: Lista con las letras incorrectas que llevas.
+        :param LetrasCorrectas: Lista con las letras correctas que llevas.
+        :param secreto: String secreta.
+        :param NumIntentos: Int de los intentos que llevas.
+        :param cat: String de la categoria actual
+        :return: Te muestra un dibujo actual de como vas y de los tintentoss que tienes, y las letras incorrectas
+        y correctas.
+        """
         print(self.Estados[len(LetrasIncorrectas)])
         print('La categoría es: ', cat)
         print()
@@ -155,11 +188,6 @@ class JuegoAhorcado:
             print(LetraIncorrecta, end=' ')
         if len(LetrasIncorrectas) == 0 and 0 == len(LetrasIncorrectas):
             print('No hay letras incorrectas.')
-        if len(LetrasIncorrectas) == len(LetrasIncorrectas) + 1:
-            print('Letras diferentes.')
-        if len(LetrasIncorrectas) == len(LetrasIncorrectas) + 2:
-            print('No coinciden.')
-
         print()
 
         EspaciosEnBlanco = ['_'] * len(secreto)
